@@ -9,7 +9,7 @@ class CustomUser(AbstractUser):
 
 
 class PhoneName(models.Model):
-    name = models.CharField('Phone Mark')
+    name = models.CharField('Phone Mark',max_length=100)
 
 
     def __str__(self):
@@ -18,3 +18,21 @@ class PhoneName(models.Model):
     class Meta:
         verbose_name = 'Phone mark'
         verbose_name_plural = 'Phone marks'
+
+class Product(models.Model):
+    phone_name=models.ForeignKey(PhoneName,on_delete=models.CASCADE)
+    model_name=models.CharField('model_name',max_length=100)
+    storage=models.IntegerField()
+    color=models.CharField('color',max_length=50)
+    release_date=models.DateField()
+    price=models.IntegerField()
+    in_stock=models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.model_name
+    
+    class Meta:
+        verbose_name = 'Product'
+        verbose_name_plural = 'Products'
+    
+
