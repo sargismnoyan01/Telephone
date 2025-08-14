@@ -9,6 +9,8 @@ class MarkSerializer(serializers.ModelSerializer):
 
 class ProductSerializer(serializers.ModelSerializer):
 
+    phone_name=MarkSerializer()
+
     class Meta:
         model = Product
         fields = ['id',
