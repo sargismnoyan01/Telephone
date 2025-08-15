@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-#vl5_3xwq)20-o(#95rh6ph4@k(r&l1fq+s4vbuz39)$gp9w2(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -40,19 +40,31 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     'main',
     'rest_framework',
+    'corsheaders',
     'phonenumbers',
     'rest_framework.authtoken',
+    'colorfield',
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    'corsheaders.middleware.CorsMiddleware',
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+]
+CSRF_TRUSTED_ORIGINS = CORS_ALLOWED_ORIGINS
+ALLOWED_HOSTS = ["*"]
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 ROOT_URLCONF = "RestProject.urls"
 
@@ -83,6 +95,18 @@ DATABASES = {
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
+
+# PostgreSQL DB Connection
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": "telephone",
+#         "USER": "postgres",
+#         "PASSWORD": "1111",
+#         "HOST": "127.0.0.1",
+#         "PORT": "5432",
+#     }
+# }
 
 
 # Password validation
