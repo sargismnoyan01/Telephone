@@ -16,14 +16,14 @@ def markapi(request):
     serialzer_class = MarkSerializer(querset, many = True)
 
 
-    return Response(data = {'mark':serialzer_class.data},status=status.HTTP_200_OK)
+    return Response(data=serialzer_class.data, status=status.HTTP_200_OK)
 
 @api_view(['GET'])
 def productapi(request):
     querset = Product.objects.all()
     serializer=ProductSerializer(querset, many = True)
 
-    return Response(data={'messages':serializer.data},status=status.HTTP_200_OK)
+    return Response(data=serializer.data,status=status.HTTP_200_OK)
 
 @api_view(['GET','POST'])
 def Registerapi(request):
@@ -49,6 +49,15 @@ class LoginView(APIView):
             return Response({'token':token.key},status=status.HTTP_200_OK)
         else:
             return Response({'error':'invaalidusername or password'},status=status.HTTP_404_NOT_FOUND)
+        
+
+class MeView(APIView):
+    permission_classes=[IsAuthenticated]
+    
+    def get(self, request):
+        serializer = UserSerializer(request.user)
+        return Response(serializer.data)
+    
         
 class LogoutView(APIView):
     persmission_classes=[IsAuthenticated]

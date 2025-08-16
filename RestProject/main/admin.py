@@ -15,3 +15,5 @@ class ProductAdmin(admin.ModelAdmin):
     list_filter = ['phone_name', 'color', 'in_stock']
     search_fields = ['model_name', 'phone_name__name', 'color']
     ordering = ['-release_date']
+    
+admin.site.register(CustomUser)
