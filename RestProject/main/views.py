@@ -8,6 +8,7 @@ from rest_framework.views import APIView
 from django.contrib.auth import authenticate
 from rest_framework.authtoken.models import Token
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.viewsets import ModelViewSet
 
 
 @api_view(['GET'])
@@ -67,3 +68,15 @@ class LogoutView(APIView):
         return Response(data={'message':'logout'},status=status.HTTP_200_OK)
 
 
+@api_view(['GET'])
+def Markditail(request,id):
+    querset=PhoneName.objects.filter(id=id)
+    if not querset.exists():
+        return Response({'error': 'not eror'},status=status.HTTP_404_NOT_FOUND)
+    
+    serializer=MarkSerializer(querset.first())
+    return Response(serializer.data,status=status.HTTP_200_OK)
+
+class PhoneViewset(ModelViewSet):
+    queryset=Product.objects.all()
+    serializer_class=ProductSerializer
