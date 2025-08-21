@@ -36,5 +36,23 @@ class Product(models.Model):
     class Meta:
         verbose_name = 'Product'
         verbose_name_plural = 'Products'
+
+class Subject(models.Model):
+    name=models.CharField(max_length=50,verbose_name='name')
+    surname=models.CharField('surname',max_length=50)
+    email=models.EmailField(verbose_name='email')
+    messages=models.TextField(verbose_name='messages')
+
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Subject'
+        verbose_name_plural = 'Subjects'
+
+    
+    
+    
     
 

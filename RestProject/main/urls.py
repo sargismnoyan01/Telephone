@@ -14,5 +14,6 @@ urlpatterns = [
     path('user-me/', MeView.as_view(), name='user-me'),
     path('marks/<int:id>/', Markditail, name='mark-detail'),
     path('',include(router.urls)),
+    path('subject/',Subjectapi,name='subject')
     
 ]

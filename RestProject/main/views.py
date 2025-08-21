@@ -80,3 +80,13 @@ def Markditail(request,id):
 class PhoneViewset(ModelViewSet):
     queryset=Product.objects.all()
     serializer_class=ProductSerializer
+
+@api_view(['POST'])
+def Subjectapi(request):
+    if request.method == 'POST':
+        serialzer=SubjectModelSerializer(data=request.data)
+        if serialzer.is_valid():
+            serialzer.save()
+            return Response(data={'message': 'sucsess'},status=status.HTTP_201_CREATED)
+    else:
+        return Response(data={'errors': 'is not valid'},status=status.HTTP_400_BAD_REQUEST)
