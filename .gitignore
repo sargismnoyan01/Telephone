@@ -1,7 +1,20 @@
-env
-./env
-../env
-.env 
-media/
+# FrontEnd
+**/node_modules/
+**/package-lock.json
+**/build
 
+# Backend
+**/venv/
+**/env/
+**/media/
+
+# SQLite database
+*.sqlite3
+
+# Migrations
+**/migrations/*
 *.pyc 
+
+
+.env 
+
