@@ -8,6 +8,8 @@
 **/env/
 **/media/
 
+**/__pycache__/
+
 # SQLite database
 *.sqlite3
 
