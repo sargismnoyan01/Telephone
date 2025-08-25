@@ -11,6 +11,11 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -90,24 +95,16 @@ WSGI_APPLICATION = "RestProject.wsgi.application"
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+    'default':  { 
+        'ENGINE': 
+        'django.db.backends.postgresql', 
+        'USER': 'postgres', 
+        'NAME': os.getenv('PSG_NAME'),
+        'PASSWORD': os.getenv('PSG_PASSWORD'), 
+        'HOST': 'localhost', 
+        'PORT': '5432', 
     }
-}
-
-# PostgreSQL DB Connection
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.postgresql",
-#         "NAME": "telephone",
-#         "USER": "postgres",
-#         "PASSWORD": "1111",
-#         "HOST": "127.0.0.1",
-#         "PORT": "5432",
-#     }
-# }
-
+ }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators

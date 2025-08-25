@@ -17,3 +17,5 @@ class ProductAdmin(admin.ModelAdmin):
     ordering = ['-release_date']
     
 admin.site.register(CustomUser)
+
+admin.site.register(Subject)

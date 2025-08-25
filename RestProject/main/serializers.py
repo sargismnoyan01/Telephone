@@ -43,3 +43,8 @@ class RegisterSerializers(serializers.ModelSerializer):
             email=validated_data['email'],
             password=validated_data['password'])
         return user
+
+class SubjectModelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=Subject
+        fields = '__all__'
