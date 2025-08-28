@@ -30,7 +30,7 @@ SECRET_KEY = "django-insecure-#vl5_3xwq)20-o(#95rh6ph4@k(r&l1fq+s4vbuz39)$gp9w2(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['127.0.0.1','localhost']
 
 
 # Application definition
@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'phonenumbers',
     'rest_framework.authtoken',
     'colorfield',
+    
 ]
 
 MIDDLEWARE = [
@@ -60,6 +61,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    
 ]
 
 CORS_ALLOWED_ORIGINS = [
@@ -67,7 +69,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:3000",
 ]
 CSRF_TRUSTED_ORIGINS = CORS_ALLOWED_ORIGINS
-ALLOWED_HOSTS = ["*"]
+
 
 CORS_ALLOW_ALL_ORIGINS = True
 
@@ -156,3 +158,6 @@ AUTH_USER_MODEL = 'main.CustomUser'
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES':['rest_framework.authentication.TokenAuthentication']
 }
+
+STRIPE_SECRET_KEY=os.getenv('STRIPE_SECRET_KEY')
+STRIPE_PUBLIC_KEY=os.getenv('STRIPE_PUBLIC_KEY')

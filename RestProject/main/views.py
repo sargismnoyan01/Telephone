@@ -9,6 +9,11 @@ from django.contrib.auth import authenticate
 from rest_framework.authtoken.models import Token
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
+import stripe
+from django.conf import settings
+
+stripe.api_key=settings.STRIPE_SECRET_KEY
+
 
 
 @api_view(['GET'])
@@ -90,3 +95,25 @@ def Subjectapi(request):
             return Response(data={'message': 'sucsess'},status=status.HTTP_201_CREATED)
     else:
         return Response(data={'errors': 'is not valid'},status=status.HTTP_400_BAD_REQUEST)
+    
+
+
+class CreatePaymentIntentView(APIView):
+
+  def post(self, request):
+        try:
+            amount = request.data.get("price")
+            if not amount:
+                return Response({"error": "Amount is required"}, status=status.HTTP_400_BAD_REQUEST)
+
+            intent = stripe.PaymentIntent.create(
+                amount=int(amount),
+                currency="usd",
+                automatic_payment_methods={"enabled": True},
+            )
+
+            return Response({"clientSecret": intent.client_secret}, status=status.HTTP_200_OK)
+
+        except Exception as e:
+            return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
