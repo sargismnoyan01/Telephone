@@ -11,6 +11,8 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
 import stripe
 from django.conf import settings
+from django.core.mail import EmailMessage
+from RestProject.settings import EMAIL_HOST_USER
 
 stripe.api_key=settings.STRIPE_SECRET_KEY
 
@@ -91,7 +93,18 @@ def Subjectapi(request):
     if request.method == 'POST':
         serialzer=SubjectModelSerializer(data=request.data)
         if serialzer.is_valid():
-            serialzer.save()
+            obj=serialzer.save(coomit=False)
+            obj.name=request.user.username
+            obj.save()
+            email=EmailMessage(
+                subject='hello',
+                body='world',
+                from_email=EMAIL_HOST_USER,
+                to=[serialzer.email]
+
+            )
+            email.send()
+
             return Response(data={'message': 'sucsess'},status=status.HTTP_201_CREATED)
     else:
         return Response(data={'errors': 'is not valid'},status=status.HTTP_400_BAD_REQUEST)
@@ -116,4 +129,6 @@ class CreatePaymentIntentView(APIView):
 
         except Exception as e:
             return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+        
+
 

@@ -47,4 +47,4 @@ class RegisterSerializers(serializers.ModelSerializer):
 class SubjectModelSerializer(serializers.ModelSerializer):
     class Meta:
         model=Subject
-        fields = '__all__'
+        fields = ['surname','email','messages']
